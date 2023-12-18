@@ -5,7 +5,7 @@ let correctAnswers = 0;
 const questions = [
     {
         question: "O que significa a palavra 'Watsu'?",
-        options: ["Water Study", "Water Therapy", "Water Shatsu", "Water Stretch"],
+        options: ["Water Study", "Water Therapy", "Water Shiatsu", "Water Stretch"],
         answer: "C"
     },
     {
