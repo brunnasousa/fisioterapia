@@ -65,38 +65,59 @@ function showQuestion(questionIndex) {
 
     answerButtons.forEach((button, index) => {
         button.textContent = `${String.fromCharCode(65 + index)}. ${questionData.options[index]}`;
-        // Adicionando um atributo data-answer para verificar a resposta
         button.setAttribute('data-answer', String.fromCharCode(65 + index));
-        button.style.backgroundColor = ''; // Reset background color
+        button.style.backgroundColor = '';
+        button.onclick = () => handleAnswerClick(button, questionData.answer);
     });
 }
 
-document.querySelectorAll('.answer-section button').forEach(button => {
-    button.addEventListener('click', (event) => {
-        const selectedAnswer = event.target.getAttribute('data-answer');
-        const isCorrect = selectedAnswer === questions[currentQuestionIndex].answer;
-        if (isCorrect) {
-            correctAnswers++;
-            event.target.style.backgroundColor = 'lightgreen';
+function handleAnswerClick(button, correctAnswer) {
+    const selectedAnswer = button.getAttribute('data-answer');
+    const isCorrect = selectedAnswer === correctAnswer;
+    if (isCorrect) {
+        correctAnswers++;
+        button.style.backgroundColor = 'lightgreen';
+    } else {
+        button.style.backgroundColor = 'lightcoral';
+    }
+    setTimeout(() => {
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
+            showQuestion(currentQuestionIndex);
         } else {
-            event.target.style.backgroundColor = 'lightcoral';
+            showFinalScore();
         }
-        setTimeout(() => {
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                showQuestion(currentQuestionIndex);
-            } else {
-                showFinalScore();
-            }
-        }, 1000);
-    });
-});
+    }, 1000);
+}
 
 function showFinalScore() {
     const gameContainer = document.querySelector('.game-container');
-    gameContainer.innerHTML = `<h1>Fim do Jogo!</h1>
-                               <p>Você acertou ${correctAnswers} de ${questions.length} perguntas.</p>`;
-    // Aqui você pode adicionar um botão para reiniciar o jogo se desejar
+    gameContainer.innerHTML = `
+        <div class='end-title'>Fim do Jogo!</div>
+        <div class='result-text'>Você acertou ${correctAnswers} de ${questions.length} perguntas.</div>
+        <button class='restart-button' onclick="restartGame()">Reiniciar Jogo</button>`;
+}
+
+
+function restartGame() {
+    currentQuestionIndex = 0;
+    correctAnswers = 0;
+    const gameContainer = document.querySelector('.game-container');
+    gameContainer.innerHTML = `
+        <div class="question-section">
+            <p>FISIOTERAPIA</p>
+            <div class="question-count">
+                <span>Questão 1</span>/10
+            </div>
+            <div class="question-text">Aqui vai a pergunta?</div>
+        </div>
+        <div class="answer-section">
+            <button>A. Opção 1</button>
+            <button>B. Opção 2</button>
+            <button>C. Opção 3</button>
+            <button>D. Opção 4</button>
+        </div>`;
+    showQuestion(currentQuestionIndex);
 }
 
 // Iniciar o jogo com a primeira pergunta
