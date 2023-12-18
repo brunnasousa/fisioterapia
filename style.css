@@ -79,3 +79,58 @@ body, html {
     font-size: 2em;
     margin-bottom: 10px;
 }
+
+
+/* Estilos para dispositivos com largura menor que 600px (celulares em retrato) */
+@media only screen and (max-width: 600px) {
+    .game-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 10px;
+        box-shadow: none;
+    }
+
+    .question-section, .answer-section button, .end-title, .result-text {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}
+
+/* Estilos para dispositivos com largura entre 601px e 900px (tablets em retrato) */
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+    .game-container {
+        width: 80%;
+        margin: 20px;
+    }
+
+    .question-section, .answer-section button, .end-title, .result-text {
+        padding: 15px;
+        font-size: 1em;
+    }
+}
+
+/* Estilos para dispositivos com largura entre 901px e 1200px (tablets em paisagem) */
+@media only screen and (min-width: 901px) and (max-width: 1200px) {
+    .game-container {
+        width: 70%;
+        margin: 30px;
+    }
+
+    .question-section, .answer-section button, .end-title, .result-text {
+        padding: 20px;
+        font-size: 1.1em;
+    }
+}
+
+/* Estilos para dispositivos com largura maior que 1201px (desktops) */
+@media only screen and (min-width: 1201px) {
+    .game-container {
+        width: 60%;
+        margin: 40px;
+    }
+
+    .question-section, .answer-section button, .end-title, .result-text {
+        padding: 25px;
+        font-size: 1.2em;
+    }
+}
